@@ -2,7 +2,7 @@ import {ChairsIndex} from "./ChairsIndex";
 import axios from "axios";
 import { useState } from "react";
 import {ChairsNew} from "./ChairsNew";
-
+import { Modal } from "./Modal";
 
 
 
@@ -36,7 +36,9 @@ export function Content() {
       
       <button onClick ={handleChairsIndex}>chairs data</button>
       <ChairsIndex chairs={chairs}/>
-      
+      <Modal show = {true} >
+        <div>More details here</div>
+      </Modal>
 
     </main>
   )
