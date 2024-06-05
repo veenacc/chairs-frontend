@@ -43,6 +43,27 @@ export function Content() {
 
   }
 
+  const handlecChairUpdate =(params, id)=>{
+
+    axios.patch(`http://localhost:3000/chairs/${id}.json`, params).then((response)=>{
+    console.log(response.data)
+    // close modal
+    handleCloseModal()
+    // show index with the updated item without refresh
+    setChairs(
+        chairs.map(chair=>{
+          if (chair.id === id)
+            return response.data
+          else
+            return chair
+          end
+        })
+    )
+   
+  })
+  // window.location.href='/'
+  }
+
   return (
     <main>
       <h1>Welcome to React!</h1>
@@ -54,7 +75,7 @@ export function Content() {
       
       <Modal show = {isChairShow} onClose={handleCloseModal}>
         <div>More details here</div>
-        <ChairShow chairs={currentChair}/>
+        <ChairShow chairs={currentChair} onChairUpdate={handlecChairUpdate}/>
       </Modal>
 
     </main>
