@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import {ChairsNew} from "./ChairsNew";
 import { Modal } from "./Modal";
+import {ChairShow} from "./ChairShow"
 
 
 
@@ -10,6 +11,7 @@ export function Content() {
 
   const [chairs, setChairs] = useState([]);
   const [isChairShow, setIsChairShow] = useState(false);
+  const [currentChair, setCurrentChair]=useState({})
 
   const handleChairsIndex=()=>{
     console.log("handling index")
@@ -29,10 +31,17 @@ export function Content() {
    
   }
 
-  const handleChairShow=()=>{
-    console.log("Show more info about item")
+  const handleChairShow=(chair)=>{
+    console.log("from handle chair show")
+    setIsChairShow(true)
+    setCurrentChair(chair)
+
   }
- 
+  const handleCloseModal=()=>{
+    console.log("closing modal")
+    setIsChairShow(false)
+
+  }
 
   return (
     <main>
@@ -40,11 +49,12 @@ export function Content() {
       <ChairsNew onHandleChairsNew={handleChairsNew}/> <hr />
       
       {/* <button onClick ={handleChairsIndex}>chairs data</button> */}
-      <button onClick={handleChairShow}>Show Info</button>
-      <ChairsIndex chairs={chairs}/>
       
-      <Modal show = {isChairShow} >
+      <ChairsIndex chairs={chairs} onShowChairInfo={handleChairShow}/>
+      
+      <Modal show = {isChairShow} onClose={handleCloseModal}>
         <div>More details here</div>
+        <ChairShow chairs={currentChair}/>
       </Modal>
 
     </main>
