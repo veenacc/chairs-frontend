@@ -49,7 +49,7 @@ export function Content() {
     console.log(response.data)
     // close modal
     handleCloseModal()
-    // show index with the updated item without refresh
+    // show list of chairs with the updated item without refresh
     setChairs(
         chairs.map(chair=>{
           if (chair.id === id)
@@ -64,6 +64,16 @@ export function Content() {
   // window.location.href='/'
   }
 
+  const handleChairDelete=(id)=>{
+    axios.delete(`http://localhost:3000/chairs/${id}.json`).then ((response)=>{
+    console.log(response.data)
+    handleCloseModal()
+    // show list of chairs without the deleted item without refresh
+    setChairs(chairs.filter((chair) => chair.id !== id));
+
+  })
+  }
+
   return (
     <main>
       <h1>Welcome to React!</h1>
@@ -75,7 +85,7 @@ export function Content() {
       
       <Modal show = {isChairShow} onClose={handleCloseModal}>
         <div>More details here</div>
-        <ChairShow chairs={currentChair} onChairUpdate={handlecChairUpdate}/>
+        <ChairShow chairs={currentChair} onChairUpdate={handlecChairUpdate} onHandleDelete={handleChairDelete}/>
       </Modal>
 
     </main>

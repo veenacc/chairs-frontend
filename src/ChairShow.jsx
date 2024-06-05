@@ -9,6 +9,13 @@ const handleSubmit=(event)=>{
   
 }
 
+const handleDeleteButton=()=>{
+  // console.log(`delete chair ${props.chairs.id}`)
+  
+  props.onHandleDelete(props.chairs.id)
+  
+}
+
   return (
     <div>
       <h1>Chair information</h1>
@@ -27,9 +34,15 @@ const handleSubmit=(event)=>{
           <div>
             price: <input defaultValue={props.chairs.price} name="price" type="text" />
           </div>
+          <br />
           <button type="submit">Update item</button>
         </form>
       
+       {/* Delete item from the list */}
+       <br />
+       <div>
+          <button onClick={handleDeleteButton}>Delete</button>
+       </div>
 
     </div>
   );
